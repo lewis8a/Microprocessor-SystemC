@@ -4,13 +4,17 @@
 #include "registerfile.h"
 #include "instrmemory.h"
 #include "regs32.h"
+#define direction_bits 2
+#define numbers_of_bits 32
+#define instruction_length 6
+#define instructions_number_read 4
 class Richard : public sc_module
 {
 	public:
 		sc_in <bool> clk; //Reloj
 		sc_in<bool > enable_in, write_enable_in; //Direcciones
-		sc_in<sc_uint<4> > pc_in; //Es la entrada que viene del pc, y nos indica cual instruccion buscaremos
-		sc_out<sc_uint<32> > r_out; //Resultado de la operacion realizada en la ALU
+		sc_in<sc_uint<instructions_number_read> > pc_in; //Es la entrada que viene del pc, y nos indica cual instruccion buscaremos
+		sc_out<sc_int<numbers_of_bits> > r_out; //Resultado de la operacion realizada en la ALU
 		SC_CTOR(Richard)
 		{
 			SC_METHOD(split);
@@ -75,9 +79,9 @@ class Richard : public sc_module
 		regs2 *reg2_1;
 		regs6 *reg6_1;
 		regs32 *reg32_1, *reg32_2, *reg32_3;
-		sc_signal<sc_uint<2> > dira, dirb, op, reg2_1_sg;
-		sc_signal<sc_uint<6> > reg6_1_sg, instr_sg;
-		sc_signal<sc_uint<32> > da, db, reg32_1_sg, reg32_2_sg, alu_sg, gnd;
+		sc_signal<sc_uint<direction_bits> > dira, dirb, op, reg2_1_sg;
+		sc_signal<sc_uint<instruction_length> > reg6_1_sg, instr_sg;
+		sc_signal<sc_int<numbers_of_bits> > da, db, reg32_1_sg, reg32_2_sg, alu_sg, gnd;
 	void split()
 	{
 		op = (reg6_1_sg.read().range(5,4));

@@ -5,9 +5,9 @@ class Regs32 : public sc_module
 {
 	public:
 		sc_in < bool > clk_in, enable_in;
-		sc_in < sc_uint<32> > data_in;
-		sc_out < sc_uint<32> > data_out;
-		sc_uint<32> data;
+		sc_in < sc_int<32> > data_in;
+		sc_out < sc_int<32> > data_out;
+		sc_int<32> data;
 		SC_CTOR(Regs32)
 		{
 			data=0;		

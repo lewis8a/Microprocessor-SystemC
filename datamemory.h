@@ -1,15 +1,15 @@
-#ifndef INSTRMEMORY_H
-#define INSTRMEMORY_H
+#ifndef DATAMEMORY_H
+#define DATAMEMORY_H
 #include <systemc.h>
 #include <fstream>
+using namespace std;
 #define instruction_length 6
-#define instructions_number_read 4
-class InstrMemory: public sc_module
+class DataMemory: public sc_module
 {
 	public:
-		sc_in< sc_uint<instructions_number_read> > dir_in;
+		sc_in< sc_uint<4> > dir_in;
 		sc_out< sc_uint<instruction_length> >instr_out;
-		SC_CTOR(InstrMemory)
+		SC_CTOR(DataMemory)
 		{
 			SC_METHOD(search);
 			sensitive << dir_in;
