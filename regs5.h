@@ -1,13 +1,13 @@
-#ifndef REGS8_H
-#define REGS8_H
+#ifndef REGS5_H
+#define REGS5_H
 #include <systemc.h>
-class Regs8 : public sc_module
+class Regs5 : public sc_module
 {
 	public:
 		sc_in < bool > clk_in, enable_in;
-		sc_in < sc_int<8> > data_in;
-		sc_out < sc_int<8> > data_out;
-		sc_int<8> data;
+		sc_in < sc_int<5> > data_in;
+		sc_out < sc_int<5> > data_out;
+		sc_int<5> data;
 		SC_CTOR(Regs8)
 		{
 			data=0;		
