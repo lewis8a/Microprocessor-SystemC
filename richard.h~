@@ -151,8 +151,8 @@ class Richard : public sc_module
 	{
 		op_sg=(instr_sg.read().range(19,15));
 		dir_result_sg=(instr_sg.read().range(14,10));
-		dirop1_sg=(instr_sg.read().range(9,5));
-		dirop2_sg=(instr_sg.read().range(4,0));
+		dirop2_sg=(instr_sg.read().range(9,5));
+		dirop1_sg=(instr_sg.read().range(4,0));
 	}
 };
 #endif
