@@ -8,8 +8,8 @@ int sc_main(int argc,char *argv[])
 	sc_clock clk("clock",PERIOD,0.5,DELAY,true);
 	
 	sc_signal< sc_uint<direction_bits> > dird,dira,dirb;
-	sc_signal< sc_int<numbers_of_bits> > a,b,data_in;
-	sc_signal< bool > enable;
+	sc_signal< sc_uint<numbers_of_bits> > a,b,data_in;
+	sc_signal< sc_uint<instructions_bits> >  enable;
 	
 	Registerfile registerfile("registerfile");
 	testbench test("test");

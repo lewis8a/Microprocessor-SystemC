@@ -2,18 +2,15 @@
 #define testbench_H
 #include <systemc.h>
 #include <iostream>
-#define data_length 5
-#define data_number_read 5
-#define instructions_bits 5
+using namespace std;
+#define instructions_number_read 4
 
 class testbench: public sc_module
 {
 	public:
 		sc_in_clk clk;
-		sc_in< sc_uint<data_length> >data_in;
-		sc_out< sc_uint<data_number_read> > dir_out;
-		sc_out<sc_uint<instructions_bits> > op_out;
-		sc_out<sc_uint<data_length> > data_out;
+		sc_out<bool> enable_out;
+		sc_out<sc_uint<instructions_number_read> > pc_out;
 		SC_CTOR(testbench)
 		{
 			SC_THREAD(test);

@@ -4,7 +4,7 @@
 #include <fstream>
 #define data_length 5
 #define data_number_read 5
-#define instructions_bits 4
+#define instructions_bits 5
 
 class DataMemory: public sc_module
 {

@@ -8,7 +8,7 @@ int sc_main(int argc,char *argv[])
 	sc_clock clk("clock",PERIOD,0.5,DELAY,true);
 
 	sc_signal< sc_uint<instructions_number> > op;
-	sc_signal< sc_int<numbers_of_bits> > a,b,c;
+	sc_signal< sc_uint<numbers_of_bits> > a,b,c;
 
 	Alu alu("alu");
 	testbench tb("tb");

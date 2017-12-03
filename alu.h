@@ -1,15 +1,15 @@
 #ifndef ALU_H
 #define ALU_H
 #include <systemc.h>
-#define instructions_number 3
-#define numbers_of_bits 32
+#define instructions_number 5
+#define numbers_of_bits 5
 class Alu: public sc_module
 {
 	public:
 		sc_in<sc_uint<instructions_number> > op_in;
-		sc_in<sc_int<numbers_of_bits> > a_in;
-		sc_in<sc_int<numbers_of_bits> > b_in;
-		sc_out<sc_int<numbers_of_bits> > c_out;
+		sc_in<sc_uint<numbers_of_bits> > a_in;
+		sc_in<sc_uint<numbers_of_bits> > b_in;
+		sc_out<sc_uint<numbers_of_bits> > c_out;
 		SC_CTOR(Alu)
 		{
 			SC_METHOD(operation);

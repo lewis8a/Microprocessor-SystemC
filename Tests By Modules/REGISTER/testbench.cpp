@@ -6,6 +6,7 @@ testbench::testbench(sc_module_name nm): sc_module(nm)
 	sensitive<<clk_in.neg();
 }
 testbench :: ~testbench(){}
+
 void testbench :: test()
 {
 	cout<<"Clock"<<" | "<<"Data_In\t| Enable | Data_Out"<<endl;
@@ -17,7 +18,7 @@ void testbench :: test()
 	print();
 
 	enable_out.write(0);
-	data_out.write(20);	
+	data_out.write(2);	
 	wait();
 	print();
 
@@ -27,7 +28,7 @@ void testbench :: test()
 	print();
 	
 	enable_out.write(1);
-	data_out.write(30);	
+	data_out.write(3);	
 	wait();
 	print();
 

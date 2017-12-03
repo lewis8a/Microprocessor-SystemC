@@ -5,55 +5,55 @@ void testbench::test()
 	cout <<"Clock"<<" | "<<"Enable"<<"\t| " <<" Dir_Data\t"<<"Data"<<"\t| " <<"Dir_A\t"<<"Dir_B\t"<<" A\t"<<" B"<<endl;
   cout<<"-------------------------------------------------------------------"<<endl;
 
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(0);
-	data_out.write(99);
+	data_out.write(7);
 	dira_out.write(0);
 	dirb_out.write(0);
 	wait();
 	print();
 
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(1);
-	data_out.write(99);
+	data_out.write(7);
 	dira_out.write(1);
 	dirb_out.write(1);
 	wait();
 	print();
 
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(2);
-	data_out.write(99);
+	data_out.write(7);
 	dira_out.write(2);
 	dirb_out.write(2);
 	wait();
 	print();
 
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(3);
-	data_out.write(99);
+	data_out.write(7);
 	dira_out.write(3);
 	dirb_out.write(3);
 	wait();
 	print();
 
-	enable_out.write(1);
+	enable_out.write(1001);
 	dirdata_out.write(3);
-	data_out.write(20);
+	data_out.write(3);
 	dira_out.write(0);
 	dirb_out.write(1);
 	wait();
 	print();
 	
-	enable_out.write(1);
+	enable_out.write(1001);
 	dirdata_out.write(1);
-	data_out.write(38);
+	data_out.write(14);
 	dira_out.write(0);
 	dirb_out.write(3);
 	wait();
 	print();
 	
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(3);
 	data_out.write(10);
 	dira_out.write(3);
@@ -61,15 +61,15 @@ void testbench::test()
 	wait();
 	print();
 
-	enable_out.write(1);
+	enable_out.write(1001);
 	dirdata_out.write(2);
-	data_out.write(97);
+	data_out.write(9);
 	dira_out.write(1);
 	dirb_out.write(3);
 	wait();
 	print();
 	
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(2);
 	data_out.write(12);
 	dira_out.write(2);
@@ -77,7 +77,7 @@ void testbench::test()
 	wait();
 	print();
 
-	enable_out.write(1);
+	enable_out.write(1001);
 	dirdata_out.write(3);
 	data_out.write(13);
 	dira_out.write(1);
@@ -85,7 +85,7 @@ void testbench::test()
 	wait();
 	print();
 	
-	enable_out.write(0);
+	enable_out.write(1000);
 	dirdata_out.write(3);
 	data_out.write(12);
 	dira_out.write(2);

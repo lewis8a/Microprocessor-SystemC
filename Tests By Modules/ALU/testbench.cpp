@@ -199,194 +199,194 @@ void testbench::test()
 	print();
 
 //Multiplicación
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(0);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(0);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(-1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(0);
 	b_out.write(-1);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(1);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(5);
 	b_out.write(5);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(99);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(1);
 	b_out.write(99);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(2);
 	b_out.write(-2);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(-2);
 	b_out.write(2);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(3);
 	b_out.write(-7);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(-7);
 	b_out.write(3);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(-9);
 	b_out.write(-9);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(-999);
 	b_out.write(-999);
 	wait();
 	print();
 
-	op_out.write(10);
+	op_out.write(2);
 	a_out.write(999);
 	b_out.write(999);
 	wait();
 	print();
 
 //División
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(0);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(0);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(-1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(0);
 	b_out.write(-1);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(1);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(5);
 	b_out.write(5);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(99);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(1);
 	b_out.write(99);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(2);
 	b_out.write(-2);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(-2);
 	b_out.write(2);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(3);
 	b_out.write(-7);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(-7);
 	b_out.write(3);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(-9);
 	b_out.write(-9);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(-999);
 	b_out.write(-999);
 	wait();
 	print();
 
-	op_out.write(11);
+	op_out.write(3);
 	a_out.write(999);
 	b_out.write(999);
 	wait();
@@ -587,194 +587,194 @@ void testbench::test()
 	print();
 
 //Or
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(0);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(0);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(-1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(0);
 	b_out.write(-1);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(1);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(5);
 	b_out.write(5);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(99);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(1);
 	b_out.write(99);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(2);
 	b_out.write(-2);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(-2);
 	b_out.write(2);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(3);
 	b_out.write(-7);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(-7);
 	b_out.write(3);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(-9);
 	b_out.write(-9);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(-999);
 	b_out.write(-999);
 	wait();
 	print();
 
-	op_out.write(110);
+	op_out.write(6);
 	a_out.write(999);
 	b_out.write(999);
 	wait();
 	print();
 
 //And
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(0);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(0);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(-1);
 	b_out.write(0);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(0);
 	b_out.write(-1);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(1);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(5);
 	b_out.write(5);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(99);
 	b_out.write(1);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(1);
 	b_out.write(99);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(2);
 	b_out.write(-2);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(-2);
 	b_out.write(2);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(3);
 	b_out.write(-7);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(-7);
 	b_out.write(3);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(-9);
 	b_out.write(-9);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(-999);
 	b_out.write(-999);
 	wait();
 	print();
 
-	op_out.write(111);
+	op_out.write(7);
 	a_out.write(999);
 	b_out.write(999);
 	wait();

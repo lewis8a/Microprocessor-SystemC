@@ -9,8 +9,8 @@ class testbench : public sc_module
 	public:
 		sc_in<bool> clk_in;
 		sc_out<bool> enable_out;
-		sc_out<sc_int<8> > data_out;
-		sc_in<sc_int<8> > data_in;
+		sc_out<sc_uint<5> > data_out;
+		sc_in<sc_uint<5> > data_in;
 		SC_CTOR(testbench);
 		~testbench();
 	private:
