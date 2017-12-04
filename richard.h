@@ -4,6 +4,7 @@
 #include "registerfile.h"
 #include "datamemory.h"
 #include "instrmemory.h"
+#include "multiplexor.h"
 #include "regs5.h"
 #define direction_bits 5
 #define numbers_of_bits 5
@@ -19,140 +20,183 @@ class Richard : public sc_module
 		SC_CTOR(Richard)
 		{
 			SC_METHOD(split);
-			sensitive<<instr_sg;
-			instmem = new InstrMemory("instmem");
-			reg0_op = new Regs5("reg0_op");
-			reg0_result = new Regs5("reg0_result");
-			reg0_op1 = new Regs5("reg0_op1");
-			reg0_op2 = new Regs5("reg0_op2");
+			sensitive<<instruction_in_sg;
+
+			instrmem = new InstrMemory("instrmem");
+			regP1_opcode = new Regs5("regP1_opcode");
+			regP1_dir_result = new Regs5("regP1_dir_result");
+			regP1_dirop1 = new Regs5("regP1_dirop1");
+			regP1_dirop2 = new Regs5("regP1_dirop2");
+
 			registerfile = new Registerfile("registerfile");
-			reg1_op = new Regs5("reg1_op");
-			reg_data_a = new Regs5("reg_data_a");
-			reg_data_b = new Regs5("reg_data_b");
-			reg1_result = new Regs5("reg1_result");
+			regP2_opcode = new Regs5("regP2_opcode");
+			regP2_dir_result = new Regs5("regP2_dir_result");
+			regP2_datA = new Regs5("regP2_datA");
+			regP2_datB = new Regs5("regP2_datB");
+
 			alu = new Alu("alu");
-			reg2_op = new Regs5("reg2_op");
-			reg_result = new Regs5("reg_result");
-			reg2_result = new Regs5("reg2_result");
+			regP3_opcode = new Regs5("regP3_opcode");
+			regP3_dir_result = new Regs5("regP3_dir_result");
+			regP3_datC = new Regs5("regP2_datC");
+
 			datamem = new DataMemory("datamem");
-			reg_data_out = new Regs5("reg_data_out");
-			reg3_op = new Regs5("reg3_op");
-			reg3_result = new Regs5("reg3_result");
+			mult = new Multiplexor("mult");
+			regP4_opcode = new Regs5("regP4_opcode");
+			regP4_dir_result = new Regs5("regP4_dir_result");
+			regP4_datC = new Regs5("regP4_datC");
+
 
 //ETAPA FETCH------------------------------
-			instmem->dir_in(pc_in);
-			instmem->instr_out(instr_sg);
+			instrmem->dir_in(pc_in);
+			instrmem->instr_out(instruction_in_sg);
 //Primer PIPE------------------------------
-			reg0_op->data_in(op_sg);
-			reg0_op->enable_in(enable_in);
-			reg0_op->clk_in(clk_in);
-			reg0_op->data_out(reg0_op_sg);
+			regP1_opcode->data_in(opcode_sg);
+			regP1_opcode->enable_in(enable_in);
+			regP1_opcode->clk_in(clk_in);
+			regP1_opcode->data_out(P1opcode_sg);
 
-			reg0_result->data_in(dir_result_sg);
-			reg0_result->enable_in(enable_in);
-			reg0_result->clk_in(clk_in);
-			reg0_result->data_out(reg0_result_sg);	
+			regP1_dir_result->data_in(dir_result_sg);
+			regP1_dir_result->enable_in(enable_in);
+			regP1_dir_result->clk_in(clk_in);
+			regP1_dir_result->data_out(P1dir_result_sg);	
 
-			reg0_op1->data_in(dirop1_sg);
-			reg0_op1->enable_in(enable_in);
-			reg0_op1->clk_in(clk_in);
-			reg0_op1->data_out(reg0_op1_sg);	
+			regP1_dirop1->data_in(dirop1_sg);
+			regP1_dirop1->enable_in(enable_in);
+			regP1_dirop1->clk_in(clk_in);
+			regP1_dirop1->data_out(P1dirop1_sg);	
 
-			reg0_op2->data_in(dirop2_sg);
-			reg0_op2->enable_in(enable_in);
-			reg0_op2->clk_in(clk_in);
-			reg0_op2->data_out(reg0_op2_sg);
+			regP1_dirop2->data_in(dirop2_sg);
+			regP1_dirop2->enable_in(enable_in);
+			regP1_dirop2->clk_in(clk_in);
+			regP1_dirop2->data_out(P1dirop2_sg);
 
 //ETAPA DECODE-----------------------------
-			registerfile->dira_in(reg0_op1_sg);
-			registerfile->dirb_in(reg0_op2_sg);
-			registerfile->a_out(data_a_sg);
-			registerfile->b_out(data_b_sg);
+			registerfile->dira_in(P1dirop1_sg);
+			registerfile->dirb_in(P1dirop2_sg);
+			registerfile->a_out(datA_regfile_sg); 
+			registerfile->b_out(datB_regfile_sg); 
 			registerfile->clk(clk_in);
 //Segundo PIPE-----------------------------
-			reg_data_a->data_in (data_a_sg);
-			reg_data_a->enable_in (enable_in);
-			reg_data_a->clk_in (clk_in);
-			reg_data_a->data_out (reg_data_a_sg);
+			regP2_datA->data_in (datA_regfile_sg);
+			regP2_datA->enable_in (enable_in);
+			regP2_datA->clk_in (clk_in);
+			regP2_datA->data_out (P2datA_sg);
 
-			reg_data_b->data_in (data_b_sg);
-			reg_data_b->enable_in (enable_in);
-			reg_data_b->clk_in (clk_in);
-			reg_data_b->data_out (reg_data_b_sg);
+			regP2_datB->data_in (datB_regfile_sg);
+			regP2_datB->enable_in (enable_in);
+			regP2_datB->clk_in (clk_in);
+			regP2_datB->data_out (P2datB_sg);
 
-			reg1_op->data_in(reg0_op_sg);
-			reg1_op->enable_in(enable_in);
-			reg1_op->clk_in(clk_in);
-			reg1_op->data_out(reg1_op_sg);
+			regP2_opcode->data_in(P1opcode_sg);
+			regP2_opcode->enable_in(enable_in);
+			regP2_opcode->clk_in(clk_in);
+			regP2_opcode->data_out(P2opcode_sg);
 
-			reg1_result->data_in(reg0_result_sg);
-			reg1_result->enable_in(enable_in);
-			reg1_result->clk_in(clk_in);
-			reg1_result->data_out(reg1_result_sg);
+			regP2_dir_result->data_in(P1dir_result_sg);
+			regP2_dir_result->enable_in(enable_in);
+			regP2_dir_result->clk_in(clk_in);
+			regP2_dir_result->data_out(P2dir_result_sg);	
 
 //ETAPA EXECUTE----------------------------
-			alu->a_in(reg_data_a_sg);
-			alu->b_in(reg_data_b_sg);
-			alu->op_in(reg1_op_sg);
+			alu->a_in(P2datA_sg);
+			alu->b_in(P2datB_sg);
+			alu->op_in(P2opcode_sg);
 			alu->c_out(alu_sg);
 //Tercer PIPE------------------------------
-			reg_result->data_in (alu_sg);
-			reg_result->enable_in (enable_in);
-			reg_result->clk_in (clk_in);
-			reg_result->data_out (reg_result_sg);
+			regP3_datC->data_in (alu_sg);
+			regP3_datC->enable_in (enable_in);
+			regP3_datC->clk_in (clk_in);
+			regP3_datC->data_out (P3_datC_sg);
 
-			reg2_op->data_in(reg1_op_sg);
-			reg2_op->enable_in(enable_in);
-			reg2_op->clk_in(clk_in);
-			reg2_op->data_out(reg2_op_sg);
+			regP3_opcode->data_in(P2opcode_sg);
+			regP3_opcode->enable_in(enable_in);
+			regP3_opcode->clk_in(clk_in);
+			regP3_opcode->data_out(P3opcode_sg);
 
-			reg2_result->data_in(reg1_result_sg);
-			reg2_result->enable_in(enable_in);
-			reg2_result->clk_in(clk_in);
-			reg2_result->data_out(reg2_result_sg);
-	
+			regP3_dir_result->data_in(P2dir_result_sg);
+			regP3_dir_result->enable_in(enable_in);
+			regP3_dir_result->clk_in(clk_in);
+			regP3_dir_result->data_out(P3dir_result_sg);
+
 //ETAPA MEMORY----------------------------
-			datamem->dir_in(reg2_result_sg);
-			datamem->op_in(reg2_op_sg);
-			datamem->data_in(reg_result_sg);
-			datamem->data_out(data_out_sg);
+			datamem->op_in(P3opcode_sg);
+			datamem->data_out(data_mem_sg);
+
+			mult->a_in(P3_datC_sg);
+			mult->b_in(data_mem_sg);
+			mult->selector(bit_selector_sg);
+			mult->s_out(multiplexor_sg);
+
 //Cuarto PIPE------------------------------
-			reg_data_out->data_in (data_out_sg);
-			reg_data_out->enable_in (enable_in);
-			reg_data_out->clk_in (clk_in);
-			reg_data_out->data_out (reg_data_out_sg);
+			regP4_datC->data_in (multiplexor_sg);
+			regP4_datC->enable_in (enable_in);
+			regP4_datC->clk_in (clk_in);
+			regP4_datC->data_out (P4_datC_sg);
 
-			reg3_op->data_in(reg2_op_sg);
-			reg3_op->enable_in(enable_in);
-			reg3_op->clk_in(clk_in);
-			reg3_op->data_out(reg3_op_sg);
+			regP4_opcode->data_in(P3opcode_sg);
+			regP4_opcode->enable_in(enable_in);
+			regP4_opcode->clk_in(clk_in);
+			regP4_opcode->data_out(P4opcode_sg);
 
-			reg3_result->data_in(reg2_result_sg);
-			reg3_result->enable_in(enable_in);
-			reg3_result->clk_in(clk_in);
-			reg3_result->data_out(reg3_result_sg);
+			regP4_dir_result->data_in(P3dir_result_sg);
+			regP4_dir_result->enable_in(enable_in);
+			regP4_dir_result->clk_in(clk_in);
+			regP4_dir_result->data_out(P4dir_result_sg);
 
 //ETAPA WRITE BACK------------------------
-			registerfile->enable_in(reg3_op_sg);
-			registerfile->dirdata_in(reg3_result_sg);
-			registerfile->data_in(reg_data_out_sg);
+
+			datamem->dir_in(P4dir_result_sg);
+			datamem->data_in(P4_datC_sg);
+
+			registerfile->enable_in(P4opcode_sg);
+			registerfile->dirdata_in(P4dir_result_sg);
+			registerfile->data_in(P4_datC_sg);
 
 		}
 	private:
-		InstrMemory *instmem;
+		InstrMemory *instrmem;
+//Señal del formato de instrucciones
+		sc_signal<sc_uint<instruction_length> > instruction_in_sg;
+//Señales que entran al primer pipe
+		sc_signal<sc_uint<direction_bits> > opcode_sg, dir_result_sg, dirop1_sg, dirop2_sg;
+//Registros del primer pipe
+		Regs5 *regP1_opcode,*regP1_dir_result,*regP1_dirop1,*regP1_dirop2;
+//Señales que salen del primer pipe
+		sc_signal<sc_uint<direction_bits> > P1opcode_sg, P1dir_result_sg, P1dirop1_sg, P1dirop2_sg;
+
 		Registerfile *registerfile;
+//Registros del segundo pipe
+		Regs5 *regP2_opcode,*regP2_dir_result,*regP2_datA,*regP2_datB;
+//Señales que entran al segundo pipe
+		sc_signal<sc_uint<direction_bits> > datA_regfile_sg, datB_regfile_sg; 
+//Señales que salen del segundo pipe
+		sc_signal<sc_uint<direction_bits> > P2opcode_sg, P2dir_result_sg,P2datA_sg,P2datB_sg;
+
 		Alu *alu;
+//Registros del tercer pipe
+		Regs5 *regP3_opcode,*regP3_dir_result,*regP3_datC;
+//Señales que entran al tercer pipe
+		sc_signal<sc_uint<direction_bits> > alu_sg; 
+//Señales que salen del tercer pipe
+		sc_signal<sc_uint<direction_bits> > P3opcode_sg, P3dir_result_sg,P3_datC_sg;
+
 		DataMemory *datamem;
-		Regs5 *reg0_op,*reg1_op,*reg2_op,*reg3_op,*reg0_op1,*reg0_op2,*reg0_result,*reg1_result,*reg2_result,*reg3_result,*reg_data_a,*reg_data_b,*reg_result,*reg_data_out;
-		sc_signal<sc_uint<direction_bits> > dirop1_sg, dirop2_sg, dir_result_sg, op_sg;
-		sc_signal<sc_uint<direction_bits> > reg0_op_sg,reg1_op_sg,reg2_op_sg,reg3_op_sg,reg0_op1_sg, reg0_op2_sg, reg0_result_sg,reg1_result_sg,reg2_result_sg,reg3_result_sg,data_a_sg, data_b_sg,data_out_sg,reg_data_a_sg, reg_data_b_sg,alu_sg,reg_result_sg,reg_data_out_sg;;
-		sc_signal<sc_uint<instruction_length> > instr_sg;
+		Multiplexor *mult;
+//Registros del cuarto pipe
+		Regs5 *regP4_opcode,*regP4_dir_result,*regP4_datC;
+//Señales que entran al cuarto pipe
+		sc_signal<sc_uint<1> > bit_selector_sg;
+		sc_signal<sc_uint<direction_bits> > data_mem_sg, multiplexor_sg;
+//Señales que salen del cuarto pipe
+		sc_signal<sc_uint<direction_bits> > P4opcode_sg, P4dir_result_sg,P4_datC_sg;
+
 	void split()
 	{
-		op_sg=(instr_sg.read().range(19,15));
-		dir_result_sg=(instr_sg.read().range(14,10));
-		dirop1_sg=(instr_sg.read().range(9,5));
-		dirop2_sg=(instr_sg.read().range(4,0));
+		opcode_sg=(instruction_in_sg.read().range(19,15));
+		dir_result_sg=(instruction_in_sg.read().range(14,10));
+		dirop1_sg=(instruction_in_sg.read().range(9,5));
+		dirop2_sg=(instruction_in_sg.read().range(4,0));
+		bit_selector_sg=(instruction_in_sg.read().range(18,18));
 	}
 };
 #endif
