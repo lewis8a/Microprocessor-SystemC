@@ -32,7 +32,7 @@ class Registerfile: public sc_module
 		sc_uint<numbers_of_bits> registers[tam_reg];
 		void read()
 		{
-			if(enable_in.read() !=8)
+			if(enable_in.read() == 9)
 			{
 				a_out.write(registers[ dira_in.read() ] );
 				b_out.write(registers[ dirb_in.read() ] );
