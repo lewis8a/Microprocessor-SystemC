@@ -18,13 +18,15 @@ CC     = g++
 CFLAGS = -g -Wno-deprecated -Wall
 OBJS   = $(SRCS:.cpp=.o)
 
+OTHER  = -Wl,-rpath=//usr/lib/systemc-2.3.1/lib-linux64 -lsystemc
+
 #En caso de trabajar con windows colocar la extensiï¿½n .exe
 EXE    = $(TARGET)
 
 .SUFFIXES: .cpp .o  
 
 $(EXE): $(OBJS) $(SRCH)  
-	$(CC) $(CFLAGS) $(INCDIR) $(LIBDIR) -o $@ $(OBJS) $(LIBS) 2>&1 | c++filt
+	$(CC) $(CFLAGS) $(INCDIR) $(LIBDIR) $(OTHER) -o $@ $(OBJS) $(LIBS) 2>&1 | c++filt
 
 all: $(EXE) exp
  
@@ -36,4 +38,5 @@ clean:
 	rm -f $(OBJS) *~ $(EXE) *.bak $(TARGET).stackdump *.vcd
    
 exp:
-    export LD_LIBRARY_PATH=/home/miguelangel/mylibs/systemc1/lib-linux64
+    export LD_LIBRARY_PATH=/home/usuarios/is/systemc/lib-linux
+	export LD_LIBRARY_PATH=/usr/lib/systemc-2.3.1/lib-linux

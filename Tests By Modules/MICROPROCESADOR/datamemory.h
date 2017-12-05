@@ -17,7 +17,7 @@ class DataMemory: public sc_module
 		{
 			SC_METHOD(operation);
 			sensitive << dir_in<<op_in<<data_in;
-			dataFile.open("dataFile.txt");
+			dataFile.open("datamemory.txt");
 		}
 		~DataMemory()
 		{

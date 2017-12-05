@@ -13,7 +13,7 @@ class InstrMemory: public sc_module
 		{
 			SC_METHOD(search);
 			sensitive << dir_in;
-			memoryFile.open("memoryFile.txt");
+			memoryFile.open("../memoryfiles/instrmemory.txt");
 		}
 		~InstrMemory()
 		{
