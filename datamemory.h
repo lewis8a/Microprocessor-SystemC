@@ -16,7 +16,7 @@ class DataMemory: public sc_module
 		SC_CTOR(DataMemory)
 		{
 			SC_METHOD(operation);
-			sensitive << dir_in<<op_in;
+			sensitive << dir_in<<op_in<<data_in;
 			dataFile.open("dataFile.txt");
 		}
 		~DataMemory()

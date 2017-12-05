@@ -33,17 +33,20 @@ class Richard : public sc_module
 			regP2_dir_result = new Regs5("regP2_dir_result");
 			regP2_datA = new Regs5("regP2_datA");
 			regP2_datB = new Regs5("regP2_datB");
+			regP2_datS = new Regs5("regP2_datS");
 
 			alu = new Alu("alu");
 			regP3_opcode = new Regs5("regP3_opcode");
 			regP3_dir_result = new Regs5("regP3_dir_result");
 			regP3_datC = new Regs5("regP2_datC");
+			regP3_datS = new Regs5("regP3_datS");
 
 			datamem = new DataMemory("datamem");
 			mult = new Multiplexor("mult");
 			regP4_opcode = new Regs5("regP4_opcode");
 			regP4_dir_result = new Regs5("regP4_dir_result");
 			regP4_datC = new Regs5("regP4_datC");
+			regP4_datS = new Regs5("regP4_datS");
 
 
 //ETAPA FETCH------------------------------
@@ -74,7 +77,8 @@ class Richard : public sc_module
 			registerfile->dira_in(P1dirop1_sg);
 			registerfile->dirb_in(P1dirop2_sg);
 			registerfile->a_out(datA_regfile_sg); 
-			registerfile->b_out(datB_regfile_sg); 
+			registerfile->b_out(datB_regfile_sg);
+			registerfile->s_out(datS_regfile_sg); 
 			registerfile->clk(clk_in);
 //Segundo PIPE-----------------------------
 			regP2_datA->data_in (datA_regfile_sg);
@@ -86,6 +90,11 @@ class Richard : public sc_module
 			regP2_datB->enable_in (enable_in);
 			regP2_datB->clk_in (clk_in);
 			regP2_datB->data_out (P2datB_sg);
+
+			regP2_datS->data_in (datS_regfile_sg);
+			regP2_datS->enable_in (enable_in);
+			regP2_datS->clk_in (clk_in);
+			regP2_datS->data_out (P2datS_sg);
 
 			regP2_opcode->data_in(P1opcode_sg);
 			regP2_opcode->enable_in(enable_in);
@@ -108,6 +117,11 @@ class Richard : public sc_module
 			regP3_datC->clk_in (clk_in);
 			regP3_datC->data_out (P3_datC_sg);
 
+			regP3_datS->data_in (P2datS_sg);
+			regP3_datS->enable_in (enable_in);
+			regP3_datS->clk_in (clk_in);
+			regP3_datS->data_out (P3_datS_sg);
+
 			regP3_opcode->data_in(P2opcode_sg);
 			regP3_opcode->enable_in(enable_in);
 			regP3_opcode->clk_in(clk_in);
@@ -124,7 +138,7 @@ class Richard : public sc_module
 
 			mult->a_in(P3_datC_sg);
 			mult->b_in(data_mem_sg);
-			mult->selector(bit_selector_sg);
+			mult->selector(P3opcode_sg);
 			mult->s_out(multiplexor_sg);
 
 //Cuarto PIPE------------------------------
@@ -132,6 +146,11 @@ class Richard : public sc_module
 			regP4_datC->enable_in (enable_in);
 			regP4_datC->clk_in (clk_in);
 			regP4_datC->data_out (P4_datC_sg);
+
+			regP4_datS->data_in (P3_datS_sg);
+			regP4_datS->enable_in (enable_in);
+			regP4_datS->clk_in (clk_in);
+			regP4_datS->data_out (P4_datS_sg);
 
 			regP4_opcode->data_in(P3opcode_sg);
 			regP4_opcode->enable_in(enable_in);
@@ -144,9 +163,8 @@ class Richard : public sc_module
 			regP4_dir_result->data_out(P4dir_result_sg);
 
 //ETAPA WRITE BACK------------------------
-
+			datamem->data_in(P4_datS_sg);
 			datamem->dir_in(P4dir_result_sg);
-			datamem->data_in(P4_datC_sg);
 
 			registerfile->enable_in(P4opcode_sg);
 			registerfile->dirdata_in(P4dir_result_sg);
@@ -166,29 +184,28 @@ class Richard : public sc_module
 
 		Registerfile *registerfile;
 //Registros del segundo pipe
-		Regs5 *regP2_opcode,*regP2_dir_result,*regP2_datA,*regP2_datB;
+		Regs5 *regP2_opcode,*regP2_dir_result,*regP2_datA,*regP2_datB,*regP2_datS;
 //Señales que entran al segundo pipe
-		sc_signal<sc_uint<direction_bits> > datA_regfile_sg, datB_regfile_sg; 
+		sc_signal<sc_uint<direction_bits> > datA_regfile_sg, datB_regfile_sg,datS_regfile_sg; 
 //Señales que salen del segundo pipe
-		sc_signal<sc_uint<direction_bits> > P2opcode_sg, P2dir_result_sg,P2datA_sg,P2datB_sg;
+		sc_signal<sc_uint<direction_bits> > P2opcode_sg, P2dir_result_sg,P2datA_sg,P2datB_sg,P2datS_sg;
 
 		Alu *alu;
 //Registros del tercer pipe
-		Regs5 *regP3_opcode,*regP3_dir_result,*regP3_datC;
+		Regs5 *regP3_opcode,*regP3_dir_result,*regP3_datC,*regP3_datS;
 //Señales que entran al tercer pipe
 		sc_signal<sc_uint<direction_bits> > alu_sg; 
 //Señales que salen del tercer pipe
-		sc_signal<sc_uint<direction_bits> > P3opcode_sg, P3dir_result_sg,P3_datC_sg;
+		sc_signal<sc_uint<direction_bits> > P3opcode_sg, P3dir_result_sg,P3_datC_sg,P3_datS_sg;
 
 		DataMemory *datamem;
 		Multiplexor *mult;
 //Registros del cuarto pipe
-		Regs5 *regP4_opcode,*regP4_dir_result,*regP4_datC;
+		Regs5 *regP4_opcode,*regP4_dir_result,*regP4_datC,*regP4_datS;
 //Señales que entran al cuarto pipe
-		sc_signal<sc_uint<1> > bit_selector_sg;
 		sc_signal<sc_uint<direction_bits> > data_mem_sg, multiplexor_sg;
 //Señales que salen del cuarto pipe
-		sc_signal<sc_uint<direction_bits> > P4opcode_sg, P4dir_result_sg,P4_datC_sg;
+		sc_signal<sc_uint<direction_bits> > P4opcode_sg, P4dir_result_sg,P4_datC_sg,P4_datS_sg;
 
 	void split()
 	{
@@ -196,7 +213,6 @@ class Richard : public sc_module
 		dir_result_sg=(instruction_in_sg.read().range(14,10));
 		dirop1_sg=(instruction_in_sg.read().range(9,5));
 		dirop2_sg=(instruction_in_sg.read().range(4,0));
-		bit_selector_sg=(instruction_in_sg.read().range(18,18));
 	}
 };
 #endif
