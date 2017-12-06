@@ -36,7 +36,7 @@ class Registerfile: public sc_module
 			if( (enable_in.read() != 9) )
 			{
 				registers[dirdata_in.read()] = data_in.read();
-				cout<<endl<<"op: "<<enable_in.read()<<" write: "<<data_in.read()<<"dir: "<<dirdata_in.read()<<endl;
+				cout<<"Registerfile: "<<"op: "<<enable_in.read()<<" write: "<<data_in.read()<<" dir: "<<dirdata_in.read()<<endl;
 			}
 		}
 		void read()
