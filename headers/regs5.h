@@ -25,6 +25,7 @@ class Regs5 : public sc_module
 	void write()
 	{
 		data_out.write(data);
+		std::cout<<"esto: "<<data_out.read()<<endl;
 	}
 };
 #endif

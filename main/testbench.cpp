@@ -4,11 +4,13 @@ void testbench::test()
 {
 	cout<<"Clock"<<" | "<<"PC\t| Enable"<<endl;
 	cout<<"------------------------"<<endl;
-	pc_out.write(0);
-	enable_out.write(1);
-	wait();
-	print();
-	
+	for(int i = 0; i<12; i++)
+	{
+		pc_out.write(i);
+		enable_out.write(1);
+		wait();
+		print();
+	}
 	sc_stop();
 }
 

@@ -29,10 +29,12 @@ class DataMemory: public sc_module
 		{
 			unsigned int dir;
 			sc_uint<data_length> data;
+
 			char dataTmp[data_length];
 			dir = dir_in.read();
 			dataFile.seekg(dir*(data_length+1), ios::beg);
-			if(op_in.read()==8)
+
+			if(op_in.read()==8) //LOAD?
 			{
 				dataFile.getline(dataTmp,data_length+1);
 				for(int i=0; i < data_length;i++)
