@@ -4,7 +4,7 @@ void testbench::test()
 {
 	for(int i = 0; i<12; i++)
 	{
-		cout<<endl<<"Instrucción: "<<i<<endl;
+		cout<<endl<<"\tInstrucción: "<<i<<endl;
 		pc_out.write(i);
 		enable_out.write(1);
 		wait();

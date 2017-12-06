@@ -1,6 +1,8 @@
 #ifndef REGS5_H
 #define REGS5_H
 #include <systemc.h>
+#include <string>
+using namespace std;
 class Regs5 : public sc_module
 {
 	public:
@@ -24,8 +26,15 @@ class Regs5 : public sc_module
 		}
 	void write()
 	{
+		string n = sc_module::name();
 		data_out.write(data);
-		std::cout<<sc_module::name()<<": "<<data_out.read()<<endl;
+
+		if( n.find("opcode") != -1 )
+			cout<<endl;
+		if( n.find("dir_result") != -1 )
+			std::cout<<sc_module::name()<<": \t"<<data_out.read()<<endl;
+		else
+				std::cout<<sc_module::name()<<": \t\t"<<data_out.read()<<endl;
 	}
 };
 #endif
