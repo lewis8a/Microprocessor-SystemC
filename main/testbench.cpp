@@ -2,14 +2,13 @@
 
 void testbench::test()
 {
-	cout<<"Clock"<<" | "<<"PC\t| Enable"<<endl;
-	cout<<"------------------------"<<endl;
 	for(int i = 0; i<12; i++)
 	{
+		cout<<endl<<"Instrucción: "<<i<<endl;
 		pc_out.write(i);
 		enable_out.write(1);
 		wait();
-		print();
+		//print();
 	}
 	sc_stop();
 }

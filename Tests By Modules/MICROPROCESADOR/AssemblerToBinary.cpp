@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 		cerr<<"Error al vincular el archivo"<<endl;
 		return 2;
 	}
-	ofstream salida("memoryFile.txt");
+	ofstream salida("instrmemory.txt");
 	if (salida.fail())
 	{
 		cerr<<"Error al vincular el archivo"<<endl;
@@ -32,25 +32,32 @@ int main(int argc, char *argv[])
 		getline(entrada,dir_result,' ');
 		getline(entrada,dir_op1,' ');		
 		getline(entrada,dir_op2,'\n');
+
 		if (!entrada.fail())
 		{
 			salida<<right<<setw(5)<<setfill('0');
-			if(cod=="ADD")
+
+			if(cod == "ADD")
 				salida<<"0";
-			if(cod=="SUB")
+			if(cod == "SUB")
 				salida<<"1";
-			if(cod=="MUL")
+			if(cod == "MUL")
 				salida<<"10";
-			if(cod=="DIV")
+			if(cod == "DIV")
 				salida<<"11";
-			if(cod=="CMP")
+			if(cod == "CMP")
 				salida<<"100";
-			if(cod=="EQU")
+			if(cod == "EQU")
 				salida<<"101";
-			if(cod=="OOR")
+			if(cod == "OOR")
 				salida<<"110";
-			if(cod=="AND")
+			if(cod == "AND")
 				salida<<"111";
+			if(cod == "LOAD")
+				salida<<"1000";
+			if(cod == "STORE")
+				salida<<"1001";
+
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_result);
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_op1);
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_op2);
@@ -65,18 +72,18 @@ int main(int argc, char *argv[])
 string decimal_to_binary (string dir)
 {
 	string binary;
-	dir=dir.substr(1,dir.length()-1);
+	dir = dir.substr(1,dir.length()-1);
 	int number;
-	number=atoi(dir.c_str());
-	if (number>0)
+	number = atoi(dir.c_str());
+	if (number > 0)
 	{
-		while(number>0)
+		while(number > 0)
 		{
-			if (number%2==0)
-				binary="0"+binary;
+			if (number%2 == 0)
+				binary = "0" + binary;
 			else
-				binary="1"+binary;
-			number=(int)number/2;
+				binary = "1" + binary;
+			number = (int)number/2;
 		}
 	} 
 	else
