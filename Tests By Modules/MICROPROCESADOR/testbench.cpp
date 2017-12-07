@@ -2,7 +2,7 @@
 
 void testbench::test()
 {
-	for(int i = 0; i<15; i++)
+	for(int i = 0; i<32; i++)
 	{
 		cout<<endl<<"\tInstrucción: "<<i<<endl;
 		pc_out.write(i);

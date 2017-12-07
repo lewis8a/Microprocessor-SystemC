@@ -42,7 +42,7 @@ class Alu: public sc_module
 				}
 				case 4:
 				{
-					if (a_in.read() > b_in.read())
+					if (a_in.read() >= b_in.read())
 						c_out.write(a_in.read());
 					else 
 						c_out.write(b_in.read());

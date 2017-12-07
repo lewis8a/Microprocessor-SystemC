@@ -53,8 +53,8 @@ class DataMemory: public sc_module
 			}
 			if(op_in.read()==9)
 			{
-				dataFile<<data_in.read().to_string(SC_BIN).substr(3);
-				cout<<"DataMemory STORE: "<<data_in.read().to_string(SC_BIN).substr(3);				
+				dataFile<<data_in.read().to_string(SC_BIN).substr(3)<<"\n";
+				cout<<"DataMemory STORE "<<"op: "<<op_in.read()<<"dir: "<<dir_in.read()<<" dato: "<<data_in.read().to_string(SC_BIN).substr(3);				
 			}
 		}
 };
