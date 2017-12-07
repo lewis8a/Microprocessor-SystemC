@@ -139,8 +139,9 @@ class Richard : public sc_module
 			mult->s_out(multiplexor_sg);
 
 			datamem->op_in(P3opcode_sg);
-			datamem->data_out(data_mem_sg);
+			datamem->data_in(P3_datC_sg);
 			datamem->dir_in(multiplexor_sg);
+			datamem->data_out(data_mem_sg);			
 
 			mult2->a_in(P3_datC_sg);
 			mult2->b_in(data_mem_sg);
@@ -163,7 +164,6 @@ class Richard : public sc_module
 			regP4_opcode->data_out(P4opcode_sg);
 
 //ETAPA WRITE BACK------------------------
-			datamem->data_in(P4_datC_sg);
 
 			registerfile->enable_in(P4opcode_sg);
 			registerfile->dirdata_in(P4dir_result_sg);
