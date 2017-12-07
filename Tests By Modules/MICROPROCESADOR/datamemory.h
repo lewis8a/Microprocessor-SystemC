@@ -5,6 +5,7 @@
 #define data_length 5
 #define data_number_read 5
 #define instructions_bits 5
+using namespace std;
 
 class DataMemory: public sc_module
 {
@@ -47,10 +48,13 @@ class DataMemory: public sc_module
 					}
 				}
 				data_out.write(data);
+				cout<<"DataMemory LOAD dir: "<<dir<<" dato: "<<data_out.read();				
+
 			}
 			if(op_in.read()==9)
 			{
 				dataFile<<data_in.read().to_string(SC_BIN).substr(3);
+				cout<<"DataMemory STORE: "<<data_in.read().to_string(SC_BIN).substr(3);				
 			}
 		}
 };

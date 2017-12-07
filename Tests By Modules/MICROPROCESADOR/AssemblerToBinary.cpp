@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 			if(cod == "STORE")
 				salida<<"1001";
 			if(cod == "NULL")
-				salida<<"11111"
+				salida<<"11111";
 
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_result);
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_op1);
