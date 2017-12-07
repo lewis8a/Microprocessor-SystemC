@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>nazi-walk.png</file>
+    </qresource>
+</RCC>
