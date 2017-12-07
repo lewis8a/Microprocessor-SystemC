@@ -163,7 +163,7 @@ class Richard : public sc_module
 			regP4_opcode->data_out(P4opcode_sg);
 
 //ETAPA WRITE BACK------------------------
-			datamem->data_in(P4_datS_sg);
+			datamem->data_in(P4_datC_sg);
 
 			registerfile->enable_in(P4opcode_sg);
 			registerfile->dirdata_in(P4dir_result_sg);
@@ -204,7 +204,7 @@ class Richard : public sc_module
 //Señales que entran al cuarto pipe
 		sc_signal<sc_uint<direction_bits> > data_mem_sg, multiplexor_sg,multiplexor2_sg;
 //Señales que salen del cuarto pipe
-		sc_signal<sc_uint<direction_bits> > P4opcode_sg, P4dir_result_sg,P4_datC_sg,P4_datS_sg;
+		sc_signal<sc_uint<direction_bits> > P4opcode_sg, P4dir_result_sg,P4_datC_sg;
 
 	void split()
 	{
