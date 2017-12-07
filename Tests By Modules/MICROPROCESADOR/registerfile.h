@@ -33,7 +33,7 @@ class Registerfile: public sc_module
 		sc_uint<numbers_of_bits> registers[tam_reg];
 		void write()
 		{
-			if( (enable_in.read() != 9) )
+			if( (enable_in.read() != 9 and enable_in.read() != 31) )
 			{
 				registers[dirdata_in.read()] = data_in.read();
 				cout<<"Registerfile: "<<"op: "<<enable_in.read()<<" write: "<<data_in.read()<<" dir: "<<dirdata_in.read()<<endl;
