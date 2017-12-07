@@ -17,7 +17,7 @@ class DataMemory: public sc_module
 		SC_CTOR(DataMemory)
 		{
 			SC_METHOD(operation);
-			sensitive << dir_in<<op_in<<data_in;
+			sensitive << dir_in;
 			dataFile.open("datamemory.txt");
 		}
 		~DataMemory()
@@ -48,7 +48,7 @@ class DataMemory: public sc_module
 					}
 				}
 				data_out.write(data);
-				cout<<"DataMemory LOAD dir: "<<dir<<" dato: "<<data_out.read();				
+				cout<<"DataMemory LOAD "<<"op: "<<op_in.read()<<"dir: "<<dir_in.read()<<" dato: "<<data<<endl;				
 
 			}
 			if(op_in.read()==9)
