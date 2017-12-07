@@ -1,32 +1,84 @@
 #include "robot.h"
 #include "dialog.h"
+
 #include <QTimer>
+#include <QDebug>
+#include <fstream>
+#include <cstdlib>
 
 Robot::Robot() : QObject() {
     currentFrame = 0;
     move = 0;
     spriteImage = new QPixmap(":/nazi-walk.png");
+
+    timer = new QTimer(this);
+    timer2 = new QTimer(this);
+    QObject::connect(timer, &QTimer::timeout, this, &Robot::walk);
+    QObject::connect(timer2, &QTimer::timeout, this, &Robot::turn);
+    timer->start(75);
+    timer2->start(1500);
 }
 
 void Robot::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Left) {
-            move = 2;
-            setPos(x()-10,y());
-        }
-        else if (event->key() == Qt::Key_Right) {
-            move = 3;
-            setPos(x()+10,y());
-        }
-        else if (event->key() == Qt::Key_Up) {
-            move = 1;
-            setPos(x(),y()-10);
+  if (event->key() == Qt::Key_Left) {
+    move = 2;
+    setPos(x() - 10,y());
+  } else if (event->key() == Qt::Key_Right) {
+    move = 3;
+    setPos(x()+10,y());
 
-        }
-        else if (event->key() == Qt::Key_Down){
-            move = 0;
-            setPos(x(),y()+10);
-    }
+  } else if (event->key() == Qt::Key_Up) {
+    move = 1;
+    setPos(x(),y()-10);
+
+  } else if (event->key() == Qt::Key_Down){
+    move = 0;
+    setPos(x(),y()+10);
+  }
+}
+
+void Robot::walk()
+{
+    std::fstream fs;
+    fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
+
+    fs << " more lorem ipsum";
+    fs.close();
+
+  //qDebug() << pos();
+  if (move == 0) { // Baja
+      if (pos().y() >= 600)
+          move = 3; // Girar derecha.
+      else setPos(x(), y() + 10);
+  } else if (move == 1) { // Sube
+      if (pos().y() <= 0)
+          move = 2; // Girar izquierda.
+        else setPos(x(), y() - 10);
+  } else if (move == 2) { // Izquierda
+      if (pos().x() <= 0)
+          move = 0; // Girar abajo
+      else setPos(x() - 10,y());
+  } else  if (move == 3) {
+      if (pos().x() >= 800)
+          move = 1;
+      else setPos(x() + 10 ,y());
+  }
+
+  /*
+  srand(time(0));
+
+  if (pos() == QPoint(200, 500) or pos() == QPoint(400, 100) or pos() == QPoint(800, 400) or
+    pos() == QPoint(100, 200) or pos() == QPoint(600, 600)) {
+    move = rand() % 5;
+  }
+  */
+}
+
+void Robot::turn()
+{
+   srand(time(0));
+   move = rand() % 4;
 }
 
 

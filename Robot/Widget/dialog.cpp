@@ -1,31 +1,35 @@
 #include "dialog.h"
+#include <QTimer>
 
 Dialog::Dialog(QWidget *parent)
-    : QGraphicsView(parent)
-{
-    int width = 600;
-    int height = 400;
+    : QGraphicsView(parent) {
+    int width = 900;
+    int height = 700;
+    setFixedSize(width, height);
 
-    scene = new QGraphicsScene(0, 0, width, height, this);
-    this->setScene(scene);
-
-    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scene = new QGraphicsScene(rect(), this);
+    setScene(scene);
+    scene->setSceneRect(0, 0, width, height);
 
     robot = new Robot();
-    robot->setRect(0,0,100,100);
+    robot->setRect(0, 0, 100, 100);
     robot->setFlag(QGraphicsItem::ItemIsFocusable);
     robot->setFocus();
 
     scene->addItem(robot);
+    obs1 = scene->addPixmap(QPixmap(":/bomb.png"));
+    obs2 = scene->addPixmap(QPixmap(":/bomb.png"));
+    obs3 = scene->addPixmap(QPixmap(":/bomb.png"));
+    obs4 = scene->addPixmap(QPixmap(":/bomb.png"));
+    obs5 = scene->addPixmap(QPixmap(":/bomb.png"));
 
-    this->setSceneRect(0, 0, width, height);
-    this->setFixedSize(width, height);
-    //this->fitInView(0, 0, width, height, Qt::KeepAspectRatio);
-
+    obs1->setPos(200, 500);
+    obs2->setPos(400, 100);
+    obs3->setPos(800, 400);
+    obs4->setPos(100, 200);
+    obs5->setPos(600, 600);
+    // this->setBackgroundBrush(QBrush(Qt::red, Qt::SolidPattern));
 }
 
-Dialog::~Dialog()
-{
-
+Dialog::~Dialog() {
 }

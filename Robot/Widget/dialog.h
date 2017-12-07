@@ -1,26 +1,24 @@
 #ifndef DIALOG_H
 #define DIALOG_H
 
+#include <iostream>
+
 #include <QDialog>
+#include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QGraphicsRectItem>
 #include <robot.h>
 
-#include <iostream>
-using namespace std;
 
-
-class Dialog : public QGraphicsView
-{
-    Q_OBJECT
-
-public:
-    Dialog(QWidget *parent = 0);
-    ~Dialog();
-private:
-    QGraphicsScene *scene;
-    Robot *robot;
+class Dialog : public QGraphicsView {
+  Q_OBJECT
+ public:
+  Dialog(QWidget *parent = 0);
+  ~Dialog();
+ private:
+  QGraphicsScene *scene;
+  QGraphicsPixmapItem *obs1, *obs2, *obs3, *obs4, *obs5;
+  Robot *robot;
 };
 
-#endif // DIALOG_H
+#endif  // DIALOG_H
