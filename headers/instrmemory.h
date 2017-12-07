@@ -3,7 +3,7 @@
 #include <systemc.h>
 #include <fstream>
 #define instruction_length 20
-#define instructions_number_read 4
+#define instructions_number_read 6
 class InstrMemory: public sc_module
 {
 	public:
@@ -13,7 +13,7 @@ class InstrMemory: public sc_module
 		{
 			SC_METHOD(search);
 			sensitive << dir_in;
-			memoryFile.open("../memoryfiles/instrmemory.txt");
+			memoryFile.open("../assembler/instrmemory.txt");
 		}
 		~InstrMemory()
 		{

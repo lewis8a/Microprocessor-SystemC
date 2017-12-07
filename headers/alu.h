@@ -23,46 +23,50 @@ class Alu: public sc_module
 				case 0:
 				{
 					c_out.write(a_in.read() + b_in.read());
+					break;
 				}
-				break;
 				case 1:
 				{
 					c_out.write(a_in.read() - b_in.read());
+					break;
 				}
-				break;
 				case 2:
 				{
 					c_out.write(a_in.read() * b_in.read());
+					break;
 				}
-				break;
 				case 3:
 				{
-						c_out.write((float)a_in.read() / (float)b_in.read());
+						c_out.write(a_in.read() / b_in.read());
+					break;
 				}
-				break;
 				case 4:
 				{
 					if (a_in.read() >= b_in.read())
 						c_out.write(a_in.read());
 					else 
 						c_out.write(b_in.read());
+					break;
 				}
-				break;
 				case 5:
 				{
 					c_out.write(a_in.read() == b_in.read());  
+					break;
 				}
-				break;
 				case 6:
 				{
 					c_out.write(a_in.read() or b_in.read());
+					break;
 				}
-				break;
 				case 7:
 				{
 					c_out.write(a_in.read() and b_in.read());  
+					break;
 				}
-				break;
+				default:
+				{
+					c_out.write(a_in.read());
+				}
 			}
 		}
 };

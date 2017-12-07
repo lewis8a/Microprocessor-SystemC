@@ -5,6 +5,7 @@
 #define data_length 5
 #define data_number_read 5
 #define instructions_bits 5
+using namespace std;
 
 class DataMemory: public sc_module
 {
@@ -16,8 +17,8 @@ class DataMemory: public sc_module
 		SC_CTOR(DataMemory)
 		{
 			SC_METHOD(operation);
-			sensitive << dir_in<<op_in<<data_in;
-			dataFile.open("../memoryfiles/datamemory.txt");
+			sensitive << dir_in;
+			dataFile.open("../Robot/Widget/datamemory.txt");
 		}
 		~DataMemory()
 		{
@@ -29,12 +30,10 @@ class DataMemory: public sc_module
 		{
 			unsigned int dir;
 			sc_uint<data_length> data;
-
 			char dataTmp[data_length];
 			dir = dir_in.read();
 			dataFile.seekg(dir*(data_length+1), ios::beg);
-
-			if(op_in.read()==8) //LOAD?
+			if(op_in.read()==8)
 			{
 				dataFile.getline(dataTmp,data_length+1);
 				for(int i=0; i < data_length;i++)
@@ -49,10 +48,13 @@ class DataMemory: public sc_module
 					}
 				}
 				data_out.write(data);
+				cout<<"DataMemory LOAD "<<"op: "<<op_in.read()<<"dir: "<<dir_in.read()<<" dato: "<<data<<endl;				
+
 			}
 			if(op_in.read()==9)
 			{
-				dataFile<<data_in.read().to_string(SC_BIN).substr(3);
+				dataFile<<data_in.read().to_string(SC_BIN).substr(3)<<"\n";
+				cout<<"DataMemory STORE "<<"op: "<<op_in.read()<<"dir: "<<dir_in.read()<<" dato: "<<data_in.read().to_string(SC_BIN).substr(3);				
 			}
 		}
 };

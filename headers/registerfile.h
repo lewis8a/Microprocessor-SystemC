@@ -17,11 +17,9 @@ class Registerfile: public sc_module
 		sc_in<sc_uint<numbers_of_bits> > data_in;
 		sc_out<sc_uint<numbers_of_bits> > a_out; //Registro leido que apunta la direccion "dira_in"
 		sc_out<sc_uint<numbers_of_bits> > b_out;  //Registro leido que apunta la direccion "dirb_in"
-		sc_out<sc_uint<numbers_of_bits> > s_out;  //Registro leido que apunta la direccion "dirdata_in"
+		// sc_out<sc_uint<numbers_of_bits> > s_out;  //Registro leido que apunta la direccion "dirdata_in"
 		SC_CTOR(Registerfile)
 		{
-			SC_METHOD(read_write);
-			sensitive<<clk.neg()<<dira_in<<dirb_in<<dirdata_in<<data_in;
 			SC_METHOD(write);
 			sensitive<<clk.pos()<<dirdata_in<<data_in<<enable_in;
 			SC_METHOD(read);
@@ -33,25 +31,18 @@ class Registerfile: public sc_module
 		}
 	private:
 		sc_uint<numbers_of_bits> registers[tam_reg];
-		void read_write()
-		{
-				a_out.write(registers[ dira_in.read() ] );
-				b_out.write(registers[ dirb_in.read() ] );
-				registers[dirdata_in.read()] = data_in.read();
-		} 
 		void write()
 		{
-			if(enable_in.read() == 8)
+			if( (enable_in.read() != 9 and enable_in.read() != 31) )
 			{
 				registers[dirdata_in.read()] = data_in.read();
+				cout<<"Registerfile: "<<"op: "<<enable_in.read()<<" write: "<<data_in.read()<<" dir: "<<dirdata_in.read()<<endl;
 			}
 		}
 		void read()
 		{
-			if(enable_in.read() == 9)
-			{
-				s_out.write(registers[ dirdata_in.read() ] );
-			}
+			a_out.write(registers[ dira_in.read() ] );
+			b_out.write(registers[ dirb_in.read() ] );
 		}
 };
 #endif

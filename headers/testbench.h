@@ -3,12 +3,11 @@
 #include <systemc.h>
 #include <iostream>
 using namespace std;
-#define instructions_number_read 4
+#define instructions_number_read 6
 
 class testbench: public sc_module
 {
 	public:
-sc_in<sc_uint<5> > LAENTRADA;
 		sc_in_clk clk;
 		sc_out<bool> enable_out;
 		sc_out<sc_uint<instructions_number_read> > pc_out;

@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 		cerr<<"Error al vincular el archivo"<<endl;
 		return 2;
 	}
-	ofstream salida("../memoryfiles/instrmemory.txt");
+	ofstream salida("instrmemory.txt");
 	if (salida.fail())
 	{
 		cerr<<"Error al vincular el archivo"<<endl;
@@ -57,6 +57,8 @@ int main(int argc, char *argv[])
 				salida<<"1000";
 			if(cod == "STORE")
 				salida<<"1001";
+			if(cod == "NULL")
+				salida<<"11111";
 
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_result);
 			salida<<right<<setw(5)<<setfill('0')<<decimal_to_binary(dir_op1);
