@@ -133,8 +133,8 @@ class Richard : public sc_module
 
 //ETAPA MEMORY----------------------------
 
-			mult->a_in(P3dirop1_sg);
-			mult->b_in(P3dir_result_sg);
+			mult->a_in(P3dir_result_sg);
+			mult->b_in(P3dirop1_sg);
 			mult->selector(P3opcode_sg);
 			mult->s_out(multiplexor_sg);
 
