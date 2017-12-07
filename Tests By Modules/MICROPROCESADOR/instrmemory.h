@@ -3,7 +3,7 @@
 #include <systemc.h>
 #include <fstream>
 #define instruction_length 20
-#define instructions_number_read 5
+#define instructions_number_read 6
 class InstrMemory: public sc_module
 {
 	public:

@@ -9,7 +9,7 @@
 #define direction_bits 5
 #define numbers_of_bits 5
 #define instruction_length 20
-#define instructions_number_read 5
+#define instructions_number_read 6
 
 class Richard : public sc_module
 {

@@ -3,7 +3,7 @@
 #include <systemc.h>
 #include <iostream>
 using namespace std;
-#define instructions_number_read 5
+#define instructions_number_read 6
 
 class testbench: public sc_module
 {
