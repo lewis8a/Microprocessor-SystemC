@@ -32,9 +32,9 @@ class Regs5 : public sc_module
 		if( n.find("opcode") != -1 )
 			cout<<endl;
 		if( n.find("dir_result") != -1 )
-			std::cout<<sc_module::name()<<": \t"<<data_out.read()<<endl;
+			std::cout<<sc_module::name()<<": \t"<<data<<endl;
 		else
-				std::cout<<sc_module::name()<<": \t\t"<<data_out.read()<<endl;
+			std::cout<<sc_module::name()<<": \t\t"<<data<<endl;
 	}
 };
 #endif
