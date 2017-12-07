@@ -11,6 +11,9 @@ Dialog::Dialog(QWidget *parent)
     setScene(scene);
     scene->setSceneRect(0, 0, width, height);
 
+    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
     robot = new Robot();
     robot->setRect(0, 0, 100, 100);
     robot->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -28,7 +31,7 @@ Dialog::Dialog(QWidget *parent)
     obs3->setPos(800, 400);
     obs4->setPos(100, 200);
     obs5->setPos(600, 600);
-    // this->setBackgroundBrush(QBrush(Qt::red, Qt::SolidPattern));
+    setStyleSheet("background-color: rgb(190,190,190)");
 }
 
 Dialog::~Dialog() {
