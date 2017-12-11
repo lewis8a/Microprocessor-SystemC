@@ -6,6 +6,9 @@
 #include <QPixmap>
 #include <QPaintEvent>
 #include <QPainter>
+#include <string>
+using namespace std;
+string decimal_to_binary(string);
 
 class Robot : public QObject, public QGraphicsRectItem {
  public:
@@ -25,6 +28,7 @@ class Robot : public QObject, public QGraphicsRectItem {
   QRectF boundingRect() const;
 
   int move;
+  
   QPixmap *spriteImage;   // In this QPixmap object will be placed sprite
   int currentFrame;  // Coordinates X, which starts the next frame of the sprite
   QTimer *timer;

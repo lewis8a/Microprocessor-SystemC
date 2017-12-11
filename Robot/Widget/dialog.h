@@ -17,7 +17,7 @@ class Dialog : public QGraphicsView {
   ~Dialog();
  private:
   QGraphicsScene *scene;
-  QGraphicsPixmapItem *obs1, *obs2, *obs3, *obs4, *obs5;
+  QGraphicsPixmapItem *obs1, *obs2, *obs3;
   Robot *robot;
 };
 

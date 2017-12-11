@@ -5,6 +5,12 @@
 #include <QDebug>
 #include <fstream>
 #include <cstdlib>
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include <math.h>
+
+using namespace std;
 
 Robot::Robot() : QObject() {
     currentFrame = 0;
@@ -14,7 +20,7 @@ Robot::Robot() : QObject() {
     timer = new QTimer(this);
     timer2 = new QTimer(this);
     QObject::connect(timer, &QTimer::timeout, this, &Robot::walk);
-    QObject::connect(timer2, &QTimer::timeout, this, &Robot::turn);
+    //QObject::connect(timer2, &QTimer::timeout, this, &Robot::turn);
     timer->start(75);
     timer2->start(1500);
 }
@@ -40,12 +46,6 @@ void Robot::keyPressEvent(QKeyEvent *event)
 
 void Robot::walk()
 {
-    std::fstream fs;
-    fs.open ("test.txt", std::fstream::in | std::fstream::out | std::fstream::app);
-
-    fs << " more lorem ipsum";
-    fs.close();
-
   //qDebug() << pos();
   if (move == 0) { // Baja
       if (pos().y() >= 600)
@@ -65,6 +65,8 @@ void Robot::walk()
       else setPos(x() + 10 ,y());
   }
 
+  turn();
+
   /*
   srand(time(0));
 
@@ -76,12 +78,129 @@ void Robot::walk()
 }
 
 void Robot::turn()
-{
-   srand(time(0));
-   move = rand() % 4;
+{    
+    std::fstream datamemory;
+    datamemory.open ("datamemory.txt");
+
+    srand(time(0));
+    if (move == 0 or move == 1)   { // Baja
+
+      datamemory.seekg(2*(6), ios::beg);
+      qDebug() << pos();
+
+      if (x() > 150 and x() < 250)
+       {
+        int n = abs(y() - 500);
+        string s = decimal_to_binary(to_string(n));
+        datamemory<<right << setw(5) << setfill('0') <<s;
+
+        if (n < 100)
+            move = 3;
+
+        cout <<  n << endl;
+        cout << s << endl;
+      }
+
+
+      if (x() > 350 and x() < 450)
+       {
+        int n = abs(y() - 100);
+        string s =  decimal_to_binary(to_string(n));
+        datamemory<<right << setw(5) << setfill('0') <<s;
+
+        cout <<  n << endl;
+        cout << s << endl;
+
+        if (n < 100)
+            move = 3;
+
+        datamemory << "pto" << endl;
+      }
+
+      if (x() > 650 and x() < 750)
+       {
+        int n = abs(y() - 300);
+        string s = decimal_to_binary(to_string(n));
+        datamemory<<right << setw(5) << setfill('0') <<s;
+
+        if (n < 100)
+            move = 3;
+
+        cout <<  n << endl;
+        cout << s << endl;
+      }
+
+
+
+  } else {
+
+        datamemory.seekg(3*(6), ios::beg);
+        qDebug() << pos();
+
+        if (y() > 450 and y() < 550)
+         {
+          int n = abs(x() - 200);
+          string s = decimal_to_binary(to_string(n));
+
+          if (n < 100)
+              move = 1;
+          datamemory << s;
+          cout << n << endl;
+          cout << s << endl;
+        }
+
+
+        if (y() > 50 and y() < 150)
+         {
+          int n = abs(x() - 400);
+          if (n < 100)
+              move = 0;
+          string s =  decimal_to_binary(to_string(n));
+          datamemory << s;
+          cout << n << endl;
+          cout << s << endl;
+        }
+
+        if (y() > 250 and y() < 350)
+         {
+          int n = abs(x() - 700);
+          string s = decimal_to_binary(to_string(n));
+
+          if (n < 100)
+              move = 1;
+          datamemory << s;
+          cout << n << endl;
+          cout << s << endl;
+        }
+
+    }
+
+
+   std::system("../../main/test");
+
 }
 
-
+string decimal_to_binary (string dir)
+{
+	string binary;
+	dir = dir.substr(1,dir.length()-1);
+	int number;
+	number = atoi(dir.c_str());
+	if (number > 0)
+	{
+		while(number > 0)
+		{
+			if (number%2 == 0)
+				binary = "0" + binary;
+			else
+				binary = "1" + binary;
+			number = (int)number/2;
+		}
+	} 
+	else
+		return "0";
+	return binary;
+}
 QRectF Robot::boundingRect() const
 {
     return QRectF(0, 0, 100, 100);

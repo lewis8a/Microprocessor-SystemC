@@ -23,14 +23,11 @@ Dialog::Dialog(QWidget *parent)
     obs1 = scene->addPixmap(QPixmap(":/bomb.png"));
     obs2 = scene->addPixmap(QPixmap(":/bomb.png"));
     obs3 = scene->addPixmap(QPixmap(":/bomb.png"));
-    obs4 = scene->addPixmap(QPixmap(":/bomb.png"));
-    obs5 = scene->addPixmap(QPixmap(":/bomb.png"));
 
     obs1->setPos(200, 500);
     obs2->setPos(400, 100);
-    obs3->setPos(800, 400);
-    obs4->setPos(100, 200);
-    obs5->setPos(600, 600);
+    obs3->setPos(700, 300);
+
     setStyleSheet("background-color: rgb(190,190,190)");
 }
 
